@@ -10,6 +10,7 @@ namespace GameDev2D
 	{
 	public:
 		Game();  //Constructor
+		~Game(); //Destructor
 
 		//Write game logic in the Update method
 		void Update(double delta);

@@ -8,6 +8,11 @@ namespace GameDev2D
 
 	}
 
+	Game::~Game()
+	{
+
+	}
+
 	void Game::Update(double delta)
 	{
 		
