@@ -320,6 +320,7 @@
     <ClInclude Include="Source\Framework\GameDev2D_Settings.h" />
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\Constants.h" />
+    <ClInclude Include="Source\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Libraries\lodepng\lodepng.cpp">
@@ -487,6 +488,7 @@
     <ClCompile Include="Source\Framework\Math\Random.cpp" />
     <ClCompile Include="Source\Framework\Graphics\GraphicTypes.cpp" />
     <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Libraries\jsoncpp\json_internalarray.inl">

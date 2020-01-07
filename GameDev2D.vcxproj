@@ -103,6 +103,7 @@
     <ClInclude Include="Source\Libraries\jsoncpp\value.h" />
     <ClInclude Include="Source\Libraries\jsoncpp\writer.h" />
     <ClInclude Include="Source\Libraries\lodepng\lodepng.h" />
+    <ClInclude Include="Source\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Framework\Animation\Animator.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="Source\Libraries\jsoncpp\json_writer.cpp" />
     <ClCompile Include="Source\Libraries\lodepng\lodepng.cpp" />
     <ClCompile Include="Source\Game.cpp" />
+    <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
