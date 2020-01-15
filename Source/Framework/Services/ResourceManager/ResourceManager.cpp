@@ -183,7 +183,6 @@ namespace GameDev2D
 
             //Does the file exist, if it doesn't the assert below will be hit
             bool doesExist = Services::GetApplication()->DoesFileExistAtPath(path);
-            assert(doesExist == true);
 
             //If the file doesn't exist, log an error
             if (doesExist == false)
