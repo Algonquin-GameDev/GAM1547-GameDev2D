@@ -2,7 +2,7 @@
 #include "../Services/Services.h"
 #include "../Debug/Log.h"
 #include "../Events/UpdateEvent.h"
-
+#include "../GameDev2D_Settings.h"
 
 namespace GameDev2D
 {
@@ -145,20 +145,24 @@ namespace GameDev2D
 
     void Application::Resume()
     {
+#if SUSPEND_APP_WHEN_IN_BACKGROUND
         //Set the isSuspended flag to false
         m_IsSuspended = false;
 
         //Dispatch a Resume Event
         DispatchEvent(Event(RESUME_EVENT));
+#endif
     }
 
     void Application::Suspend()
     {
+#if SUSPEND_APP_WHEN_IN_BACKGROUND
         //Set the isSuspended flag to true
         m_IsSuspended = true;
 
         //Dispatch a Suspend Event
         DispatchEvent(Event(SUSPEND_EVENT));
+#endif
     }
 
     void Application::Shutdown()
