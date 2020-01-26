@@ -5,7 +5,7 @@ namespace GameDev2D
 	class Timer
 	{
 	public:
-		Timer(double duration);
+		Timer(double duration, bool startTimer = false);
 
 		void Update(double delta);
 

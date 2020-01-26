@@ -2,10 +2,10 @@
 
 namespace GameDev2D
 {
-	Timer::Timer(double duration) :
+	Timer::Timer(double duration, bool startTimer) :
 		m_Duration(duration),
 		m_Elapsed(0.0),
-		m_IsRunning(false)
+		m_IsRunning(startTimer)
 	{
 
 	}
