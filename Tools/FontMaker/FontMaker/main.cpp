@@ -11,7 +11,9 @@ const std::string CHARACTER_SET_ALPHA_NUMERIC_EXT = CHARACTER_SET_ALPHA_NUMERIC 
 const std::string CHARACTER_SET = CHARACTER_SET_ALPHA_NUMERIC_EXT;
 
 const std::string INPUT_DIRECTORY = "\\..\\Input\\";
-const std::string OUTPUT_DIRECTORY = "\\..\\Output\\";
+//const std::string OUTPUT_DIRECTORY = "\\..\\Output\\";
+const std::string OUTPUT_DIRECTORY = "\\..\\..\\..\\GameDev2D\\Assets\\Fonts\\";
+
 
 
 std::string GetApplicationDirectory();
