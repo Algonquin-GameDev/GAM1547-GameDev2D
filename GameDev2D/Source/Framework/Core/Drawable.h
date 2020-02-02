@@ -64,12 +64,42 @@ namespace GameDev2D
 		//Returns the blending mode of the Drawable object
 		BlendingMode GetBlendingMode();
 
+		//Returns the location of the left most edge
+		float GetLeftEdge();
+
+		//Returns the location of the right most edge
+		float GetRightEdge();
+
+		//Returns the location of the top most edge
+		float GetTopEdge();
+
+		//Returns the location of the bottom most edge
+		float GetBottomEdge();
+
     protected:
+		//Overridden from transformable, used to figure out when to re-calculate the edges
+		void TransformMatrixIsDirty() override;
+
+		//Calculates the 4 edges
+		void CalculateEdges();
+
         //Member variables
         Shader* m_Shader;
         Color m_Color;
         Vector2 m_Anchor;
 		BlendingMode m_BlendingMode;
+
+		enum Drawable_Edges
+		{
+			LeftEdge = 0,
+			RightEdge,
+			TopEdge,
+			BottomEdge,
+			TotalEdges
+		};
+
+		float m_Edges[TotalEdges];
+		bool m_EdgesCalculationDirty;
     };
 }
 

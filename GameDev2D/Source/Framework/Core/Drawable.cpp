@@ -7,7 +7,9 @@ namespace GameDev2D
         m_Shader(nullptr),
         m_Color(Color::WhiteColor()),
         m_Anchor(0.0f, 0.0f),
-		m_BlendingMode(BlendingMode())
+		m_BlendingMode(BlendingMode()),
+		m_Edges{},
+		m_EdgesCalculationDirty(true)
     {
 
     }
@@ -89,5 +91,76 @@ namespace GameDev2D
 	BlendingMode Drawable::GetBlendingMode()
 	{
 		return m_BlendingMode;
+	}
+
+	float Drawable::GetLeftEdge()
+	{
+		if (m_EdgesCalculationDirty == true)
+		{
+			CalculateEdges();
+		}
+
+		return m_Edges[LeftEdge];
+	}
+
+	float Drawable::GetRightEdge()
+	{
+		if (m_EdgesCalculationDirty == true)
+		{
+			CalculateEdges();
+		}
+
+		return m_Edges[RightEdge];
+	}
+
+	float Drawable::GetTopEdge()
+	{
+		if (m_EdgesCalculationDirty == true)
+		{
+			CalculateEdges();
+		}
+
+		return m_Edges[TopEdge];
+	}
+
+	float Drawable::GetBottomEdge()
+	{
+		if (m_EdgesCalculationDirty == true)
+		{
+			CalculateEdges();
+		}
+
+		return m_Edges[BottomEdge];
+	}
+
+	void Drawable::TransformMatrixIsDirty()
+	{
+		m_EdgesCalculationDirty = true;
+		Transformable::TransformMatrixIsDirty();
+	}
+
+	void Drawable::CalculateEdges()
+	{
+		Vector2 position = GetTransformMatrix().GetTranslation();
+		float radians = GetTransformMatrix().GetRadians();
+		float w = GetWidth();
+		float h = GetHeight();
+		float c = cosf(radians);
+		float s = sinf(radians);
+		float cw = c * w;
+		float ch = c * h;
+		float sw = s * w;
+		float sh = s * h;
+		float ex = (fabsf(sh) + fabsf(cw)) * 0.5f;
+		float ey = (fabsf(sw) + fabsf(ch)) * 0.5f;
+		float ax = GetAnchor().x;
+		float ay = GetAnchor().y;
+
+		//Calculate the edge positions
+		m_Edges[LeftEdge] = position.x + sh * (ay - 0.5) - cw * (ax - 0.5) - ex;
+		m_Edges[RightEdge] = position.x + sh * (ay - 0.5) - cw * (ax - 0.5) + ex;
+		m_Edges[TopEdge] = position.y - sw * (ax - 0.5) - ch * (ay - 0.5) + ey;
+		m_Edges[BottomEdge] = position.y - sw * (ax - 0.5) - ch * (ay - 0.5) - ey;
+		m_EdgesCalculationDirty = false;
 	}
 }

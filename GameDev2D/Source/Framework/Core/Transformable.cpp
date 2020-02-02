@@ -52,32 +52,32 @@ namespace GameDev2D
     void Transformable::SetPosition(Vector2 aPosition)
     {
         m_Position = aPosition;
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
 	void Transformable::SetPosition(float aX, float aY)
 	{
 		m_Position.x = aX;
 		m_Position.y = aY;
-		m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
 	}
 
 	void Transformable::SetPositionX(float aX)
 	{
 		m_Position.x = aX;
-		m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
 	}
 
 	void Transformable::SetPositionY(float aY)
 	{
 		m_Position.y = aY;
-		m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
 	}
 
     void Transformable::Translate(Vector2 aOffset)
     {
         m_Position += aOffset;
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
     float Transformable::GetDegrees()
@@ -93,19 +93,19 @@ namespace GameDev2D
     void Transformable::SetDegrees(float aDegrees)
     {
         m_Rotation.SetDegrees(aDegrees);
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
     void Transformable::SetRadians(float aRadians)
     {
         m_Rotation.SetRadians(aRadians);
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
     void Transformable::Rotate(Rotation& aRotation)
     {
         m_Rotation.SetRadians(m_Rotation.GetRadians() + aRotation.GetRadians());
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
     Vector2 Transformable::GetDirection()
@@ -116,7 +116,7 @@ namespace GameDev2D
     void Transformable::SetDirection(Vector2 aDirection)
     {
         m_Rotation.SetDirection(aDirection);
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
     Vector2 Transformable::GetScale()
@@ -127,30 +127,35 @@ namespace GameDev2D
     void Transformable::SetScale(Vector2 aScale)
     {
         m_Scale = aScale;
-        m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
     }
 
 	void Transformable::SetScale(float aSacleX, float aScaleY)
 	{
 		m_Scale.x = aSacleX;		
 		m_Scale.y = aScaleY;
-		m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
 	}
 
 	void Transformable::SetScaleX(float aSacleX)
 	{
 		m_Scale.x = aSacleX;
-		m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
 	}
 
 	void Transformable::SetScaleY(float aSacleY)
 	{
 		m_Scale.y = aSacleY;
-		m_IsTransformMatrixDirty = true;
+		TransformMatrixIsDirty();
 	}
 
     void Transformable::Log()
     {
         Log::Message(Log::Verbosity_Debug, "[Transformable] Position(%f, %f), Rotation(%f), Scale(%f, %f)", m_Position.x, m_Position.y, m_Rotation.GetRadians(), m_Scale.x, m_Scale.y);
     }
+
+	void Transformable::TransformMatrixIsDirty()
+	{
+		m_IsTransformMatrixDirty = true;
+	}
 }

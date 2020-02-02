@@ -75,6 +75,8 @@ namespace GameDev2D
         void Log();
 
     protected:
+		virtual void TransformMatrixIsDirty();
+
         //Member variables
         Matrix m_Transform;
         Rotation m_Rotation;
