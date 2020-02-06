@@ -106,6 +106,18 @@ namespace GameDev2D
     unsigned int GetScreenHeight();
 
 
+    // Returns half of the width of the Window
+    unsigned int GetHalfScreenWidth();
+
+
+    // Returns half of the height of the Window
+    unsigned int GetHalfScreenHeight();
+
+
+    // Returns the current active Camera
+    Camera* GetCamera();
+
+
 	// Loads an audio file. All audio files MUST be of type wav. If the audio file doesn't exist, then a default tone will be 
 	// loaded instead
 	void LoadAudio(const std::string& filename);

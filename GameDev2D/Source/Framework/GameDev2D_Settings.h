@@ -28,5 +28,5 @@
 #define LOG_FILE "/Log.txt"
 #define LOG_VERBOSITY_MASK Log::Verbosity_Debug | Log::Verbosity_Application
 
-#define CHECK_FOR_MEMORY_LEAKS 0
+#define CHECK_FOR_MEMORY_LEAKS 1
 //#define RANDOM_SEED 1729

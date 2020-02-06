@@ -37,6 +37,21 @@ namespace GameDev2D
         return Services::GetApplication()->GetWindow()->GetHeight();
     }
 
+    unsigned int GetHalfScreenWidth()
+    {
+        return GetScreenWidth() / 2;
+    }
+
+    unsigned int GetHalfScreenHeight()
+    {
+        return GetScreenHeight() / 2;
+    }
+
+    Camera* GetCamera()
+    {
+        return Services::GetGraphics()->GetActiveCamera();
+    }
+
 	void LoadAudio(const std::string& aFilename)
 	{
 		Services::GetResourceManager()->LoadWaveFile(aFilename);

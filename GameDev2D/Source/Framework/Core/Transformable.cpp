@@ -108,6 +108,16 @@ namespace GameDev2D
 		TransformMatrixIsDirty();
     }
 
+    void Transformable::RotateDegrees(float aDegrees)
+    {
+        Rotate(Rotation::Degrees(aDegrees));
+    }
+
+    void Transformable::RotateRadians(float aRadians)
+    {
+        Rotate(Rotation::Radians(aRadians));
+    }
+
     Vector2 Transformable::GetDirection()
     {
         return m_Rotation.GetDirection();

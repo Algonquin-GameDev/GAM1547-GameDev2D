@@ -50,6 +50,12 @@ namespace GameDev2D
         //Rotates the Transformable object from its current angle
         void Rotate(Rotation& rotation);
 
+        //Rotates the Transformable object from its current angle in Degrees
+        void RotateDegrees(float degrees);
+
+        //Rotates the Transformable object from its current angle in Degrees
+        void RotateRadians(float radians);
+
         //Returns the direction vector of the Transformable object
         Vector2 GetDirection();
 
