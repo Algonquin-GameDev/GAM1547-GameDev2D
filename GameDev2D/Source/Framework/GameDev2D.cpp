@@ -47,6 +47,30 @@ namespace GameDev2D
         return GetScreenHeight() / 2;
     }
 
+	float GetTextureWidth(const std::string& filename)
+	{
+		float width = 0.0f;
+		Texture* texture = Services::GetResourceManager()->GetTexture(filename);
+		if (texture != nullptr)
+		{
+			width = texture->GetWidth();
+		}
+
+		return width;
+	}
+
+	float GetTextureHeight(const std::string& filename)
+	{
+		float height = 0.0f;
+		Texture* texture = Services::GetResourceManager()->GetTexture(filename);
+		if (texture != nullptr)
+		{
+			height = texture->GetHeight();
+		}
+
+		return height;
+	}
+
     Camera* GetCamera()
     {
         return Services::GetGraphics()->GetActiveCamera();

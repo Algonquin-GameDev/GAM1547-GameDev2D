@@ -1,4 +1,6 @@
 #include "Vector2.h"
+#include "Rotation.h"
+#include <algorithm>
 #include <math.h>
 
 
@@ -33,6 +35,17 @@ namespace GameDev2D
     {
 
     }
+
+	Vector2 Vector2::Min(const Vector2& a, const Vector2& b)
+	{
+		return Vector2(fminf(a.x, b.x), fminf(a.y, b.y));
+	}
+
+	Vector2 Vector2::Max(const Vector2& a, const Vector2& b)
+	{
+		return Vector2(fmaxf(a.x, b.x), fmaxf(a.y, b.y));
+	}
+
 
 	Rotation Vector2::Angle()
     {

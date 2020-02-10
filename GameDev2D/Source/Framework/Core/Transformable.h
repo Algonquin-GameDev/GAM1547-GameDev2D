@@ -7,21 +7,24 @@
 
 namespace GameDev2D
 {
-    class Transformable
-    {
-    public:
-        Transformable();
+	class Transformable
+	{
+	public:
+		Transformable();
 		Transformable(const Transformable& transformable);
 		virtual ~Transformable();
 
-        //Returns the Transformation matrix
-        Matrix GetTransformMatrix();
+		//Returns the Transformation matrix
+		Matrix GetTransformMatrix();
 
-        //Returns the Position of the Transformable object
-        Vector2 GetPosition();
+		//Returns the World Position of the Transformable object (factoring a parent's position)
+		Vector2 GetWorldPosition();
 
-        //Sets the Position of the Transformable object
-        void SetPosition(Vector2 position);
+		//Returns the Position of the Transformable object
+		Vector2 GetPosition();
+
+		//Sets the Position of the Transformable object
+		void SetPosition(Vector2 position);
 
 		//Sets the Position of the Transformable object
 		void SetPosition(float x, float y);
@@ -32,41 +35,50 @@ namespace GameDev2D
 		//Sets the Position along the y-axis of the Transformable object
 		void SetPositionY(float y);
 
-        //Translates the Transformable object from its current position
-        void Translate(Vector2 offset);
+		//Translates the Transformable object from its current position
+		void Translate(Vector2 offset);
 
-        //Returns the Angle of the Transformable object in Degrees
-        float GetDegrees();
+		//Returns the World Angle (in degrees) of the Transformable object (factoring a parent's rotation)
+		float GetWorldDegrees();
+
+		//Returns the World Angle (in radians) of the Transformable object (factoring a parent's rotation)
+		float GetWorldRadians();
+
+		//Returns the Angle of the Transformable object in Degrees
+		float GetDegrees();
 
 		//Returns the Angle of the Transformable object in Radians
 		float GetRadians();
 
-        //Sets the Angle of the Transformable object in Degrees
-        void SetDegrees(float degrees);
+		//Sets the Angle of the Transformable object in Degrees
+		void SetDegrees(float degrees);
 
 		//Sets the Angle of the Transformable object in Degrees
 		void SetRadians(float radians);
 
-        //Rotates the Transformable object from its current angle
-        void Rotate(Rotation& rotation);
+		//Rotates the Transformable object from its current angle
+		void Rotate(Rotation& rotation);
 
-        //Rotates the Transformable object from its current angle in Degrees
-        void RotateDegrees(float degrees);
+		//Rotates the Transformable object from its current angle in Degrees
+		void RotateDegrees(float degrees);
 
-        //Rotates the Transformable object from its current angle in Degrees
-        void RotateRadians(float radians);
+		//Rotates the Transformable object from its current angle in Degrees
+		void RotateRadians(float radians);
 
-        //Returns the direction vector of the Transformable object
-        Vector2 GetDirection();
+		//Returns the direction vector of the Transformable object
+		Vector2 GetDirection();
 
-        //Sets the direction vector of the Transformable object
-        void SetDirection(Vector2 direction);
+		//Sets the direction vector of the Transformable object
+		void SetDirection(Vector2 direction);
 
-        //Returns the scale of the Transformable object
-        Vector2 GetScale();
+		//Returns the World Scale of the Transformable object (factoring a parent's scale)
+		Vector2 GetWorldScale();
 
-        //Sets the scale of the Transformable object
-        void SetScale(Vector2 scale);
+		//Returns the scale of the Transformable object
+		Vector2 GetScale();
+
+		//Sets the scale of the Transformable object
+		void SetScale(Vector2 scale);
 
 		//Sets the scale of the Transformable object
 		void SetScale(float scaleX, float scaleY);
@@ -77,17 +89,27 @@ namespace GameDev2D
 		//Sets the scale along the y-axis of the Transformable object
 		void SetScaleY(float scaleY);
 
-        //Logs the position, rotation and scale data to the output window
-        void Log();
+		//Returns wether the transfomation matrix is dirty or not
+		bool IsTransformationMatrixDirty();
 
-    protected:
+		//Attach this Transformable to a parent Transformable, it will move, rotate and scale with the parent Transformable
+		void AttachTo(Transformable* parent);
+
+		//Returns the parent Transformable
+		Transformable* GetParent();
+
+		//Logs the position, rotation and scale data to the output window
+		void Log();
+
+	protected:
 		virtual void TransformMatrixIsDirty();
 
-        //Member variables
-        Matrix m_Transform;
-        Rotation m_Rotation;
-        Vector2 m_Position;
-        Vector2 m_Scale;
-        bool m_IsTransformMatrixDirty;
-    };
+		//Member variables
+		Matrix m_Transform;
+		Rotation m_Rotation;
+		Vector2 m_Position;
+		Vector2 m_Scale;
+		Transformable* m_Parent;
+		bool m_IsTransformMatrixDirty;
+	};
 }

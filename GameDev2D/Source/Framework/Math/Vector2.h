@@ -29,6 +29,12 @@ namespace GameDev2D
 		//2D unit vector constant (0,-1)
 		static const Vector2 Down;
 
+		//Returns a Vector2 that is composed of the smallest components of two inputs
+		static Vector2 Min(const Vector2& a, const Vector2& b);
+
+		//Returns a Vector2 that is composed of the largest components of two inputs
+		static Vector2 Max(const Vector2& a, const Vector2& b);
+
         //Calculates the angle of the vector
         Rotation Angle();
 

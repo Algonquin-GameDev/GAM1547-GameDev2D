@@ -6,6 +6,7 @@ namespace GameDev2D
     //Initialize the static variables to NULL
     Application* Services::s_Application = nullptr;
 	AudioEngine* Services::s_AudioEngine = nullptr;
+	CollisionManager* Services::s_CollisionManager = nullptr;
     Graphics* Services::s_Graphics = nullptr;
     ResourceManager* Services::s_ResourceManager = nullptr;
     InputManager* Services::s_InputManager = nullptr;
@@ -15,8 +16,9 @@ namespace GameDev2D
     {
         s_Application = aApplication;
 		s_AudioEngine = new AudioEngine();
-        s_Graphics = new Graphics();
-        s_ResourceManager = new ResourceManager();
+		s_Graphics = new Graphics();
+		s_ResourceManager = new ResourceManager();
+		s_CollisionManager = new CollisionManager();
         s_InputManager = new InputManager();
         s_DebugUI = new DebugUI();
     }
@@ -41,6 +43,12 @@ namespace GameDev2D
             s_ResourceManager = nullptr;
         }
 
+		if (s_CollisionManager != nullptr)
+		{
+			delete s_CollisionManager;
+			s_CollisionManager = nullptr;
+		}
+
         if (s_Graphics != nullptr)
         {
             delete s_Graphics;
@@ -63,6 +71,12 @@ namespace GameDev2D
 	{
 		assert(s_AudioEngine != nullptr);
 		return s_AudioEngine;
+	}
+
+	CollisionManager * Services::GetCollisionManager()
+	{
+		assert(s_CollisionManager != nullptr);
+		return s_CollisionManager;
 	}
     
     Graphics* Services::GetGraphics()

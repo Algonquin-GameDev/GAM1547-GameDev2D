@@ -321,6 +321,19 @@
     <ClInclude Include="Source\Game.h" />
     <ClInclude Include="Source\Constants.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Framework\Core\GameObject.h" />
+    <ClInclude Include="Source\Framework\Collision\AxisAlignedRectangleCollider.h" />
+    <ClInclude Include="Source\Framework\Collision\CircleCollider.h" />
+    <ClInclude Include="Source\Framework\Collision\Collider.h" />
+    <ClInclude Include="Source\Framework\Collision\ColliderGroup.h" />
+    <ClInclude Include="Source\Framework\Collision\CollisionCallback.h" />
+    <ClInclude Include="Source\Framework\Collision\CollisionEvent.h" />
+    <ClInclude Include="Source\Framework\Collision\CollisionFilter.h" />
+    <ClInclude Include="Source\Framework\Collision\LineCollider.h" />
+    <ClInclude Include="Source\Framework\Collision\OrientedRectangleCollider.h" />
+    <ClInclude Include="Source\Framework\Collision\PointCollider.h" />
+    <ClInclude Include="Source\Framework\Services\CollisionManager\CollisionManager.h" />
+    <ClInclude Include="Source\Framework\Math\LineSegment.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Libraries\lodepng\lodepng.cpp">
@@ -489,6 +502,19 @@
     <ClCompile Include="Source\Framework\Graphics\GraphicTypes.cpp" />
     <ClCompile Include="Source\Game.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Framework\Core\GameObject.cpp" />
+    <ClCompile Include="Source\Framework\Collision\AxisAlignedRectangleCollider.cpp" />
+    <ClCompile Include="Source\Framework\Collision\CircleCollider.cpp" />
+    <ClCompile Include="Source\Framework\Collision\Collider.cpp" />
+    <ClCompile Include="Source\Framework\Collision\ColliderGroup.cpp" />
+    <ClCompile Include="Source\Framework\Collision\CollisionCallback.cpp" />
+    <ClCompile Include="Source\Framework\Collision\CollisionEvent.cpp" />
+    <ClCompile Include="Source\Framework\Collision\CollisionFilter.cpp" />
+    <ClCompile Include="Source\Framework\Collision\LineCollider.cpp" />
+    <ClCompile Include="Source\Framework\Collision\OrientedRectangleCollider.cpp" />
+    <ClCompile Include="Source\Framework\Collision\PointCollider.cpp" />
+    <ClCompile Include="Source\Framework\Services\CollisionManager\CollisionManager.cpp" />
+    <ClCompile Include="Source\Framework\Math\LineSegment.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Libraries\jsoncpp\json_internalarray.inl">

@@ -1,12 +1,14 @@
 #include "Audio.h"
 #include "../Services/Services.h"
 #include "../Events/Event.h"
+#include "../Events/UpdateEvent.h"
 #include <algorithm>
 
 
 namespace GameDev2D
 {
-	Audio::Audio(const std::string& aFilename) :
+	Audio::Audio(const std::string& aFilename, AudioCallback* callback) :
+		m_Callback(callback),
 		m_Source(nullptr),
 		m_IsPlaying(false),
 		m_SampleOffset(0)
@@ -23,14 +25,22 @@ namespace GameDev2D
 
 		//Create the audio voice
 		Services::GetAudioEngine()->CreateAudioVoice(&m_Source, &m_WaveFormat);
+
+		//
+		Services::GetApplication()->AddEventListener(this, UPDATE_EVENT);
+
+		//
+		m_State = Regular;
 	}
 
 	Audio::~Audio()
 	{
 		Services::GetAudioEngine()->DestroyAudioVoice(m_Source);
+
+		Services::GetApplication()->RemoveEventListener(this, UPDATE_EVENT);
 	}
 
-	void Audio::Play()
+	void Audio::Play(bool aForcePlay)
 	{
 		//We can only have one
 		if (IsPlaying() == false)
@@ -51,6 +61,14 @@ namespace GameDev2D
 			//Set the is playing flag to true
 			m_IsPlaying = true;
 		}
+		else
+		{
+			if (aForcePlay == true)
+			{
+				Stop();
+				Play();
+			}
+		}
 	}
 
 	void Audio::Stop()
@@ -61,6 +79,26 @@ namespace GameDev2D
 
 		//Set the is playing flag to false
 		m_IsPlaying = false;
+	}
+
+	void Audio::FadeIn(double duration)
+	{
+		m_State = F_In;
+		m_FadeDuration = duration;
+		m_FadeTimer = 0.0;
+
+		SetVolume(0.0f);
+		Play();
+	}
+
+	void Audio::FadeOut(double duration)
+	{
+		if (IsPlaying() == true)
+		{
+			m_State = F_Out;
+			m_FadeDuration = duration;
+			m_FadeTimer = 0.0;
+		}
 	}
 
 	bool Audio::IsPlaying()
@@ -230,6 +268,45 @@ namespace GameDev2D
 		unsigned int milleseconds = GetDurationMS();
 		double seconds = (double)milleseconds / 1000.0;
 		return seconds;
+	}
+
+	AudioCallback * Audio::GetCallback()
+	{
+		return m_Callback;
+	}
+
+	void Audio::HandleEvent(Event * event)
+	{
+		if (event->GetEventCode() == UPDATE_EVENT)
+		{
+			UpdateEvent* update = (UpdateEvent*)event;
+			double delta = update->GetDelta();
+
+			if (m_State == F_In)
+			{
+				m_FadeTimer += delta;
+				if (m_FadeTimer >= m_FadeDuration)
+				{
+					m_FadeTimer = m_FadeDuration;
+					m_State = Regular;
+				}
+
+				float pct = m_FadeTimer / m_FadeDuration;
+				SetVolume(pct);
+			}
+			else if (m_State == F_Out)
+			{
+				m_FadeTimer += delta;
+				if (m_FadeTimer >= m_FadeDuration)
+				{
+					m_FadeTimer = m_FadeDuration;
+					m_State = Regular;
+				}
+
+				float pct = 1.0f - (m_FadeTimer / m_FadeDuration);
+				SetVolume(pct);
+			}
+		}
 	}
 
 	void Audio::DispatchEvent(Event& aEvent)

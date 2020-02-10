@@ -2,6 +2,7 @@
 
 #include "../Windows/Application.h"
 #include "AudioEngine/AudioEngine.h"
+#include "CollisionManager/CollisionManager.h"
 #include "Graphics/Graphics.h"
 #include "InputManager/InputManager.h"
 #include "DebugUI/DebugUI.h"
@@ -27,6 +28,7 @@ namespace GameDev2D
         //Getter methods to access the Services's GameServices
         static Application* GetApplication();
 		static AudioEngine* GetAudioEngine();
+		static CollisionManager* GetCollisionManager();
         static Graphics* GetGraphics();
         static ResourceManager* GetResourceManager();
         static InputManager* GetInputManager();
@@ -36,6 +38,7 @@ namespace GameDev2D
         //Static variables for each GameService
         static Application* s_Application;
 		static AudioEngine* s_AudioEngine;
+		static CollisionManager* s_CollisionManager;
         static Graphics* s_Graphics;
         static ResourceManager* s_ResourceManager;
         static InputManager* s_InputManager;

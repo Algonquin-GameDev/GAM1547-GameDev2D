@@ -95,7 +95,7 @@ namespace GameDev2D
 
 	float Drawable::GetLeftEdge()
 	{
-		if (m_EdgesCalculationDirty == true)
+		if (m_EdgesCalculationDirty == true || m_Parent != nullptr)
 		{
 			CalculateEdges();
 		}
@@ -105,7 +105,7 @@ namespace GameDev2D
 
 	float Drawable::GetRightEdge()
 	{
-		if (m_EdgesCalculationDirty == true)
+		if (m_EdgesCalculationDirty == true || m_Parent != nullptr)
 		{
 			CalculateEdges();
 		}
@@ -115,7 +115,7 @@ namespace GameDev2D
 
 	float Drawable::GetTopEdge()
 	{
-		if (m_EdgesCalculationDirty == true)
+		if (m_EdgesCalculationDirty == true || m_Parent != nullptr)
 		{
 			CalculateEdges();
 		}
@@ -125,7 +125,7 @@ namespace GameDev2D
 
 	float Drawable::GetBottomEdge()
 	{
-		if (m_EdgesCalculationDirty == true)
+		if (m_EdgesCalculationDirty == true || m_Parent != nullptr)
 		{
 			CalculateEdges();
 		}

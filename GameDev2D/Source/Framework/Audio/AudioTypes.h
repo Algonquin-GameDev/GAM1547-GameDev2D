@@ -26,13 +26,13 @@ namespace GameDev2D
 		void* data;
 	};
 
-	struct AudioCallback : public IXAudio2VoiceCallback
+	struct AudioPlaybackCallback : public IXAudio2VoiceCallback
 	{
-		AudioCallback()
+		AudioPlaybackCallback()
 		{
 		}
 
-		virtual ~AudioCallback()
+		virtual ~AudioPlaybackCallback()
 		{
 		}
 
@@ -54,6 +54,10 @@ namespace GameDev2D
 			{
 				Audio* audio = reinterpret_cast<Audio*>(context);
 				audio->DispatchEvent(AudioEvent(audio, AUDIO_PLAYBACK_ENDED));
+				if (audio->GetCallback() != nullptr)
+				{
+					audio->GetCallback()->AudioIsDone(audio);
+				}
 			}
 		}
 
@@ -63,6 +67,10 @@ namespace GameDev2D
 			{
 				Audio* audio = reinterpret_cast<Audio*>(context);
 				audio->DispatchEvent(AudioEvent(audio, AUDIO_LOOP_ENDED));
+				if (audio->GetCallback() != nullptr)
+				{
+					audio->GetCallback()->AudioDidLoop(audio);
+				}
 			}
 		}
 		__declspec(nothrow) void __stdcall OnVoiceError(void* context, HRESULT) {}

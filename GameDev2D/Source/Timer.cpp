@@ -2,10 +2,22 @@
 
 namespace GameDev2D
 {
-	Timer::Timer(double duration, bool startTimer) :
+	Timer::Timer(double duration, bool startTimer, TimerCallback* callback) :
 		m_Duration(duration),
 		m_Elapsed(0.0),
-		m_IsRunning(startTimer)
+		m_IsRunning(startTimer),
+		m_DoesRepeat(false),
+		m_Callback(callback)
+	{
+
+	}
+
+	Timer::Timer(double duration, TimerCallback* callback) :
+		m_Duration(duration),
+		m_Elapsed(0.0),
+		m_IsRunning(false),
+		m_DoesRepeat(false),
+		m_Callback(callback)
 	{
 
 	}
@@ -17,8 +29,25 @@ namespace GameDev2D
 			m_Elapsed += delta;
 			if (m_Elapsed > m_Duration)
 			{
-				m_Elapsed = m_Duration;
-				m_IsRunning = false;
+				if (m_DoesRepeat == true)
+				{
+					m_Elapsed -= m_Duration;
+
+					if (m_Callback != nullptr)
+					{
+						m_Callback->TimerDidLoop(this);
+					}
+				}
+				else
+				{
+					m_Elapsed = m_Duration;
+					m_IsRunning = false;
+
+					if (m_Callback != nullptr)
+					{
+						m_Callback->TimerIsDone(this);
+					}
+				}
 			}
 		}
 	}
@@ -65,9 +94,24 @@ namespace GameDev2D
 		return m_Duration - m_Elapsed;
 	}
 
-	float Timer::GetPercentageComplete()
+	float Timer::GetPercentageElapsed()
 	{
 		return m_Elapsed / m_Duration;
+	}
+
+	float Timer::GetPercentageRemaining()
+	{
+		return 1.0f - GetPercentageElapsed();
+	}
+
+	void Timer::SetDoesRepeat(bool doesRepeat)
+	{
+		m_DoesRepeat = doesRepeat;
+	}
+
+	bool Timer::GetDoesRepeat()
+	{
+		return m_DoesRepeat;
 	}
 
 	bool Timer::IsRunning()

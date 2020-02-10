@@ -6,7 +6,17 @@
 #include "Animation/Easing.h"
 #include "Audio/Audio.h"
 #include "Audio/AudioTypes.h"
+#include "Collision/AxisAlignedRectangleCollider.h"
+#include "Collision/CircleCollider.h"
+#include "Collision/Collider.h"
+#include "Collision/CollisionCallback.h"
+#include "Collision/CollisionEvent.h"
+#include "Collision/CircleCollider.h"
+#include "Collision/LineCollider.h"
+#include "Collision/OrientedRectangleCollider.h"
+#include "Collision/PointCollider.h"
 #include "Core/Drawable.h"
+#include "Core/GameObject.h"
 #include "Core/Transformable.h"
 #include "Debug/Log.h"
 #include "Debug/Profile.h"
@@ -48,11 +58,13 @@
 #include "Input/Keyboard.h"
 #include "Input/Mouse.h"
 #include "IO/File.h"
+#include "Math/LineSegment.h"
 #include "Math/Math.h"
 #include "Math/Matrix.h"
 #include "Math/Rotation.h"
 #include "Math/Vector2.h"
 #include "Services/Services.h"
+#include "Services/CollisionManager/CollisionManager.h"
 #include "Services/DebugUI/DebugUI.h"
 #include "Services/Graphics/Graphics.h"
 #include "Services/InputManager/InputManager.h"
@@ -112,6 +124,14 @@ namespace GameDev2D
 
     // Returns half of the height of the Window
     unsigned int GetHalfScreenHeight();
+
+
+	// Returns the width of an already loaded Texture
+	float GetTextureWidth(const std::string& filename);
+
+
+	// Returns the width of an already loaded Texture
+	float GetTextureHeight(const std::string& filename);
 
 
     // Returns the current active Camera

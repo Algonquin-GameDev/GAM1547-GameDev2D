@@ -171,17 +171,31 @@ namespace GameDev2D
             //Draw the Debug Rectangle
             Vector2 size = Vector2(GetWidth() * GetScale().x, GetHeight() * GetScale().y);
             graphics->DrawRectangle(GetTransformMatrix().GetTranslation(), size, GetTransformMatrix().GetRotation(), GetAnchor(), Color::BlueColor(), false);
+#endif
 
-            
 
-            //Draw the origin lines
-            Vector2 axisSize = Vector2(16.0f, 16.0f);
-            Vector2 offset1 = axisSize * GetDirection();
-            Vector2 offset2 = axisSize * Rotation::Degrees(GetTransformMatrix().GetRotation().GetDegrees() + 90.0f).GetDirection();
+
+#if DEBUG && DEBUG_DRAW_SPRITE_AABB
+			float left = GetLeftEdge();
+			float right = GetRightEdge();
+			float top = GetTopEdge();
+			float bottom = GetBottomEdge();
+			graphics->DrawLine(Vector2(left, top), Vector2(right, top), Color::RedColor());
+			graphics->DrawLine(Vector2(left, bottom), Vector2(right, bottom), Color::RedColor());
+			graphics->DrawLine(Vector2(left, top), Vector2(left, bottom), Color::RedColor());
+			graphics->DrawLine(Vector2(right, top), Vector2(right, bottom), Color::RedColor());
+#endif
+
+#if DEBUG && (DEBUG_DRAW_SPRITE_RECT || DEBUG_DRAW_SPRITE_AABB)
+
+			//Draw the origin lines
+			Vector2 axisSize = Vector2(16.0f, 16.0f);
+			Vector2 offset1 = axisSize * GetDirection();
+			Vector2 offset2 = axisSize * Rotation::Degrees(GetTransformMatrix().GetRotation().GetDegrees() + 90.0f).GetDirection();
 			Vector2 origin = GetTransformMatrix().GetTranslation();
 
-            graphics->DrawLine(origin, origin + offset1, Color::BlueColor());
-            graphics->DrawLine(origin, origin + offset2, Color::GreenColor());
+			graphics->DrawLine(origin, origin + offset1, Color::BlueColor());
+			graphics->DrawLine(origin, origin + offset2, Color::GreenColor());
 #endif
         }
     }

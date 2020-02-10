@@ -7,18 +7,33 @@
 
 namespace GameDev2D
 {
+	//Forward declaration
+	class Audio;
+
+	//Class definition for the AudioCallback interface
+	class AudioCallback
+	{
+	public:
+		virtual ~AudioCallback() {}
+		virtual void AudioIsDone(Audio* audio) = 0;
+		virtual void AudioDidLoop(Audio* audio) = 0;
+	};
+
     //Audio class to handle playback of both music and sounds effects in game.
     class Audio : public EventDispatcher
     {
     public:
         //Constructor for the Audio class, many extensions are supported, use 'streamed' for longer files such as background music.
         //Don't stream for short files, such as sound effects. Audio files be looped.
-        Audio(const std::string& filename);
+        Audio(const std::string& filename, AudioCallback* callback = nullptr);
         ~Audio();
 
         //Play and Stop methods
-        void Play();
+        void Play(bool forcePlay = false);
         void Stop();
+
+		void FadeIn(double duration);
+		void FadeOut(double duration);
 
         //Returns wether the audio is playing
         bool IsPlaying();
@@ -83,15 +98,33 @@ namespace GameDev2D
 		//Returns the duration of the audio object, in seconds
 		double GetDuration();
 
+		//Returns the AudioCallback, can be nullptr
+		AudioCallback* GetCallback();
+
+		//
+		void HandleEvent(Event* event);
+
 		//
 		void DispatchEvent(Event& event);
 
     private:
         //Member variables
+		AudioCallback* m_Callback;
 		IXAudio2SourceVoice* m_Source;
 		WAVEFORMATEX m_WaveFormat;
 		XAUDIO2_BUFFER m_Buffer;
 		bool m_IsPlaying;
 		unsigned long long m_SampleOffset;
+		double m_FadeTimer;
+		double m_FadeDuration;
+
+		enum State
+		{
+			Regular = 0,
+			F_In,
+			F_Out
+		};
+
+		State m_State;
     };
 }

@@ -34,6 +34,6 @@ namespace GameDev2D
 	private:
 		IXAudio2* m_Engine;
 		IXAudio2MasteringVoice* m_MasteringVoice;
-		AudioCallback m_Callback;
+		AudioPlaybackCallback m_Callback;
 	};
 }
