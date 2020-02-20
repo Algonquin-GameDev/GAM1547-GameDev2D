@@ -34,24 +34,24 @@ namespace GameDev2D
 		void Deactivate();
 
 		//Methods to add Circle colliders to the transformable
-		CircleCollider* AddCircleCollider(float radius, Collider::Type type, CollisionCallback* callback = nullptr);
-		CircleCollider* AddCircleCollider(float radius, Collider::Type type, CollisionFilter filter, CollisionCallback* callback = nullptr);
+		CircleCollider* AddCircleCollider(float radius, Collider::Type type);
+		CircleCollider* AddCircleCollider(float radius, Collider::Type type, CollisionFilter filter);
 
 		//Methods to add Rectangle colliders to the transformable
-		OrientedRectangleCollider* AddOrientedRectangleCollider(float width, float height, Collider::Type type, CollisionCallback* callback = nullptr);
-		OrientedRectangleCollider* AddOrientedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter, CollisionCallback* callback = nullptr);
+		OrientedRectangleCollider* AddOrientedRectangleCollider(float width, float height, Collider::Type type);
+		OrientedRectangleCollider* AddOrientedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter);
 
 		//Methods to add Axis-a ligned Rectangle colliders to the transformable
-		AxisAlignedRectangleCollider* AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type, CollisionCallback* callback = nullptr);
-		AxisAlignedRectangleCollider* AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter, CollisionCallback* callback = nullptr);
+		AxisAlignedRectangleCollider* AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type);
+		AxisAlignedRectangleCollider* AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter);
 
 		//Methods to add Point colliders to the transformable
-		PointCollider* AddPointCollider(Collider::Type type, CollisionCallback* callback = nullptr);
-		PointCollider* AddPointCollider(Collider::Type type, CollisionFilter filter, CollisionCallback* callback = nullptr);
+		PointCollider* AddPointCollider(Collider::Type type);
+		PointCollider* AddPointCollider(Collider::Type type, CollisionFilter filter);
 
 		//Methods to add Line colliders to the transformable
-		LineCollider* AddLineCollider(const LineSegment& lineSegment, Collider::Type type, CollisionCallback* callback = nullptr);
-		LineCollider* AddLineCollider(const LineSegment& lineSegment, Collider::Type type, CollisionFilter filter, CollisionCallback* callback = nullptr);
+		LineCollider* AddLineCollider(const LineSegment& lineSegment, Collider::Type type);
+		LineCollider* AddLineCollider(const LineSegment& lineSegment, Collider::Type type, CollisionFilter filter);
 
 		//Returns the numbers of colliders
 		size_t GetNumberOfColliders();

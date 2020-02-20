@@ -94,76 +94,76 @@ namespace GameDev2D
 		SetIsActive(false);
 	}
 
-	CircleCollider* GameObject::AddCircleCollider(float radius, Collider::Type type, CollisionCallback* callback)
+	CircleCollider* GameObject::AddCircleCollider(float radius, Collider::Type type)
 	{
-		CircleCollider* collider = new CircleCollider(this, radius, type, callback);
+		CircleCollider* collider = new CircleCollider(this, radius, type, this);
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	CircleCollider* GameObject::AddCircleCollider(float radius, Collider::Type type, CollisionFilter filter, CollisionCallback* callback)
+	CircleCollider* GameObject::AddCircleCollider(float radius, Collider::Type type, CollisionFilter filter)
 	{
-		CircleCollider* collider = new CircleCollider(this, radius, type, callback);
+		CircleCollider* collider = new CircleCollider(this, radius, type, this);
 		collider->GetFilter() = filter;
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	OrientedRectangleCollider* GameObject::AddOrientedRectangleCollider(float width, float height, Collider::Type type, CollisionCallback* callback)
+	OrientedRectangleCollider* GameObject::AddOrientedRectangleCollider(float width, float height, Collider::Type type)
 	{
-		OrientedRectangleCollider* collider = new OrientedRectangleCollider(this, width, height, type, callback);
+		OrientedRectangleCollider* collider = new OrientedRectangleCollider(this, width, height, type, this);
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	OrientedRectangleCollider* GameObject::AddOrientedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter, CollisionCallback* callback)
+	OrientedRectangleCollider* GameObject::AddOrientedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter)
 	{
-		OrientedRectangleCollider* collider = new OrientedRectangleCollider(this, width, height, type, callback);
+		OrientedRectangleCollider* collider = new OrientedRectangleCollider(this, width, height, type, this);
 		collider->GetFilter() = filter;
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	AxisAlignedRectangleCollider* GameObject::AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type, CollisionCallback* callback)
+	AxisAlignedRectangleCollider* GameObject::AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type)
 	{
-		AxisAlignedRectangleCollider* collider = new AxisAlignedRectangleCollider(this, width, height, type, callback);
+		AxisAlignedRectangleCollider* collider = new AxisAlignedRectangleCollider(this, width, height, type, this);
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	AxisAlignedRectangleCollider* GameObject::AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter, CollisionCallback* callback)
+	AxisAlignedRectangleCollider* GameObject::AddAxisAlignedRectangleCollider(float width, float height, Collider::Type type, CollisionFilter filter)
 	{
-		AxisAlignedRectangleCollider* collider = new AxisAlignedRectangleCollider(this, width, height, type, callback);
+		AxisAlignedRectangleCollider* collider = new AxisAlignedRectangleCollider(this, width, height, type, this);
 		collider->GetFilter() = filter;
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	PointCollider* GameObject::AddPointCollider(Collider::Type type, CollisionCallback* callback)
+	PointCollider* GameObject::AddPointCollider(Collider::Type type)
 	{
-		PointCollider* collider = new PointCollider(this, type, callback);
+		PointCollider* collider = new PointCollider(this, type, this);
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	PointCollider* GameObject::AddPointCollider(Collider::Type type, CollisionFilter filter, CollisionCallback* callback)
+	PointCollider* GameObject::AddPointCollider(Collider::Type type, CollisionFilter filter)
 	{
-		PointCollider* collider = new PointCollider(this, type, callback);
+		PointCollider* collider = new PointCollider(this, type, this);
 		collider->GetFilter() = filter;
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	LineCollider* GameObject::AddLineCollider(const LineSegment& lineSegment, Collider::Type type, CollisionCallback* callback)
+	LineCollider* GameObject::AddLineCollider(const LineSegment& lineSegment, Collider::Type type)
 	{
-		LineCollider* collider = new LineCollider(this, lineSegment, type, callback);
+		LineCollider* collider = new LineCollider(this, lineSegment, type, this);
 		m_Colliders.push_back(collider);
 		return collider;
 	}
 
-	LineCollider* GameObject::AddLineCollider(const LineSegment& lineSegment, Collider::Type type, CollisionFilter filter, CollisionCallback* callback)
+	LineCollider* GameObject::AddLineCollider(const LineSegment& lineSegment, Collider::Type type, CollisionFilter filter)
 	{
-		LineCollider* collider = new LineCollider(this, lineSegment, type, callback);
+		LineCollider* collider = new LineCollider(this, lineSegment, type, this);
 		collider->GetFilter() = filter;
 		m_Colliders.push_back(collider);
 		return collider;

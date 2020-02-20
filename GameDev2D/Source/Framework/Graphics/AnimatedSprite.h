@@ -9,61 +9,87 @@
 
 namespace GameDev2D
 {
-    class AnimatedSprite : public SpriteAtlas
-    {
-    public:
-        //Creates a AnimatedSprite for the given filename, all the frames in the atlas will 
-        //be stored, you must specify which frames are to be used in the animation using the 
-        //AddFrame method below, by supplying the atlas key for each frame
-        AnimatedSprite(const std::string& filename);
-        ~AnimatedSprite();
+	//Forward declaration
+	class AnimatedSprite;
 
-        //Handles Update events so that the AnimatedSprite times each frame properly
-        void HandleEvent(Event* event);
-            
-        //Adds a frame to the back of the animation, the frame must be in
-        //the spriteAtlas that was loaded on creation
-        void AddFrame(const std::string& atlasKey);
+	//Class definition for the AnimatedSpriteCallback interface
+	class AnimatedSpriteCallback
+	{
+	public:
+		virtual ~AnimatedSpriteCallback() {}
+		virtual void AnimatedSpriteIsDone(AnimatedSprite* animatedSprite) = 0;
+		virtual void AnimatedSpriteDidLoop(AnimatedSprite* animatedSprite) = 0;
+	};
+
+	//Class definition
+	class AnimatedSprite : public SpriteAtlas
+	{
+	public:
+		//Creates a AnimatedSprite for the given filename, all the frames in the atlas will 
+		//be stored, you must specify which frames are to be used in the animation using the 
+		//AddFrame method below, by supplying the atlas key for each frame
+		AnimatedSprite(const std::string& filename, AnimatedSpriteCallback* callback = nullptr);
+		~AnimatedSprite();
+
+		//Handles Update events so that the AnimatedSprite times each frame properly
+		void HandleEvent(Event* event);
+
+		//Adds a frame to the back of the animation, the frame must be in
+		//the spriteAtlas that was loaded on creation
+		void AddFrame(const std::string& atlasKey);
 
 		//Removes all the frames in the animation
 		void RemoveAllFrames();
 
-        //Returns the frame count
-        unsigned long GetFrameCount();
+		//Returns the frame count
+		unsigned long GetFrameCount();
 
-        //Returns the frame index
-        int GetFrameIndex();
+		//Returns the frame index
+		int GetFrameIndex();
 
-        //Sets the frame index
-        void SetFrameIndex(unsigned int frameIndex);
+		//Sets the frame index
+		void SetFrameIndex(unsigned int frameIndex);
 
-        //Returns the frame speed of the sprite, must be animated
-        float GetFrameSpeed();
+		//Returns the frame speed of the sprite, must be animated
+		float GetFrameSpeed();
 
-        //Set the frame speed of an animated sprite
-        void SetFrameSpeed(float frameSpeed);
+		//Set the frame speed of an animated sprite
+		void SetFrameSpeed(float frameSpeed);
 
-        //Returns wether this Sprite loops, must be animated
-        bool DoesLoop();
+		//Returns wether this Sprite loops, must be animated
+		bool DoesLoop();
 
-        //Sets if the Sprite loops, must be animated
-        void SetDoesLoop(bool doesLoop);
+		//Sets if the Sprite loops, must be animated
+		void SetDoesLoop(bool doesLoop);
+
+		//Resumes a paused animation
+		void Play();
 
 		//Pauses an animation
 		void Pause();
 
-		//Resumes a paused animation
-		void Resume();
+		//Stops an animation and returns to the first frame
+		void Stop();
 
-    private:
-        //Member variables
-        std::vector<std::string> m_Frames;
-        unsigned int m_FrameIndex;
-        float m_FrameSpeed;
-        double m_ElapsedTime;
-        bool m_DoesLoop;
+		//Returns wether the animation is animating or not?
+		bool IsPlaying();
+
+		//Sets the AnimatedSpriteCallback pointer
+		void SetCallback(AnimatedSpriteCallback* callback);
+
+		//Returns the AnimatedSpriteCallback, can be nullptr
+		AnimatedSpriteCallback* GetCallback();
+
+	private:
+		//Member variables
+		AnimatedSpriteCallback* m_Callback;
+		std::vector<std::string> m_Frames;
+		unsigned int m_FrameIndex;
+		float m_FrameSpeed;
+		double m_ElapsedTime;
+		bool m_DoesLoop;
 		bool m_Pause;
-    };
+	};
 }
 
 #endif

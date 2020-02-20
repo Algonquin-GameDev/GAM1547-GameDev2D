@@ -15,7 +15,7 @@ namespace GameDev2D
 	class Timer
 	{
 	public:
-		Timer(double duration, bool startTimer = false, TimerCallback* callback = nullptr);
+		Timer(double duration, bool startTimer, TimerCallback* callback = nullptr);
 		Timer(double duration, TimerCallback* callback = nullptr);
 
 		void Update(double delta);
@@ -29,14 +29,17 @@ namespace GameDev2D
 		void SetDuration(double duration);
 		double GetDuration();
 
+		void SetCallback(TimerCallback* callback);
+		TimerCallback* GetCallback();
+
 		double GetElapsed();
 		double GetRemaining();
 
 		float GetPercentageElapsed();
 		float GetPercentageRemaining();
 
-		void SetDoesRepeat(bool doesRepeat);
-		bool GetDoesRepeat();
+		void SetDoesLoop(bool doesLoop);
+		bool GetDoesLoop();
 
 		bool IsRunning();
 		bool IsDone();
@@ -45,7 +48,7 @@ namespace GameDev2D
 		double m_Duration;
 		double m_Elapsed;
 		bool m_IsRunning;
-		bool m_DoesRepeat;
+		bool m_DoesLoop;
 		TimerCallback* m_Callback;
 	};
 }
