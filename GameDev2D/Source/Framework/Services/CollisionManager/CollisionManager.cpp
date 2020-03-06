@@ -59,14 +59,12 @@ namespace GameDev2D
 		m_DynamicColliders.PreCollisionUpdate(delta);
 		m_StaticColliders.PreCollisionUpdate(delta);
 
-
-#if DEBUG && DEBUG_DRAW_COLLIDERS
-		//Clear the points of contact
-		m_PointsOfContact.clear();
-
+        //Reset the colliders groups
         m_DynamicColliders.Reset();
         m_StaticColliders.Reset();
-#endif
+
+		//Clear the points of contact
+		m_PointsOfContact.clear();
 
         //Get the iterator to the first collider
         std::vector<Collider*>::iterator itA = m_DynamicColliders.activeColliders.begin();
