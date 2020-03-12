@@ -10,11 +10,11 @@ namespace GameDev2D
 	Audio::Audio(const std::string& aFilename, AudioCallback* callback) :
 		m_Callback(callback),
 		m_Source(nullptr),
-		m_IsPlaying(false),
 		m_SampleOffset(0),
         m_FadeTimer(0.0),
         m_FadeDuration(0.0),
-        m_Fader(NoFade)
+        m_Fader(NoFade),
+        m_State(Stopped)
 	{
 		//Get the wave data from the resource manager
 		WaveData* waveData = Services::GetResourceManager()->GetWaveData(aFilename);
@@ -57,8 +57,8 @@ namespace GameDev2D
 			//Reset the buffer
 			m_Buffer.PlayBegin = 0;
 
-			//Set the is playing flag to true
-			m_IsPlaying = true;
+			//Set the State flag to Playing
+            m_State = Playing;
 		}
 		else
 		{
@@ -76,8 +76,8 @@ namespace GameDev2D
 		m_Source->Stop();
 		m_Source->FlushSourceBuffers();
 
-		//Set the is playing flag to false
-		m_IsPlaying = false;
+		//Set the State flag to Stopped
+        m_State = Stopped;
 	}
 
 	void Audio::FadeIn(double duration)
@@ -102,7 +102,7 @@ namespace GameDev2D
 
 	bool Audio::IsPlaying()
 	{
-		return m_IsPlaying;
+		return m_State == Playing;
 	}
 
 	void Audio::SetDoesLoop(bool aDoesLoop)

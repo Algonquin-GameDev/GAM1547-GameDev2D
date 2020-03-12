@@ -113,7 +113,6 @@ namespace GameDev2D
 		IXAudio2SourceVoice* m_Source;
 		WAVEFORMATEX m_WaveFormat;
 		XAUDIO2_BUFFER m_Buffer;
-		bool m_IsPlaying;
 		unsigned long long m_SampleOffset;
 		double m_FadeTimer;
 		double m_FadeDuration;
@@ -126,5 +125,14 @@ namespace GameDev2D
 		};
 
         Fader m_Fader;
+
+        enum State
+        {
+            Stopped = 0,
+            Playing,
+            Paused
+        };
+
+        State m_State;
     };
 }
