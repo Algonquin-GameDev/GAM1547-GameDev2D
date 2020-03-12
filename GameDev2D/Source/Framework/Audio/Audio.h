@@ -118,13 +118,13 @@ namespace GameDev2D
 		double m_FadeTimer;
 		double m_FadeDuration;
 
-		enum State
+		enum Fader
 		{
-			Regular = 0,
-			F_In,
-			F_Out
+			NoFade = 0,
+			Fade_In,
+			Fade_Out
 		};
 
-		State m_State;
+        Fader m_Fader;
     };
 }

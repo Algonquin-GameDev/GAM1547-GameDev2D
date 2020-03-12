@@ -11,7 +11,10 @@ namespace GameDev2D
 		m_Callback(callback),
 		m_Source(nullptr),
 		m_IsPlaying(false),
-		m_SampleOffset(0)
+		m_SampleOffset(0),
+        m_FadeTimer(0.0),
+        m_FadeDuration(0.0),
+        m_Fader(NoFade)
 	{
 		//Get the wave data from the resource manager
 		WaveData* waveData = Services::GetResourceManager()->GetWaveData(aFilename);
@@ -26,17 +29,13 @@ namespace GameDev2D
 		//Create the audio voice
 		Services::GetAudioEngine()->CreateAudioVoice(&m_Source, &m_WaveFormat);
 
-		//
-		Services::GetApplication()->AddEventListener(this, UPDATE_EVENT);
-
-		//
-		m_State = Regular;
+		//Register for Update events
+        Services::GetApplication()->AddEventListener(this, UPDATE_EVENT);
 	}
 
 	Audio::~Audio()
 	{
 		Services::GetAudioEngine()->DestroyAudioVoice(m_Source);
-
 		Services::GetApplication()->RemoveEventListener(this, UPDATE_EVENT);
 	}
 
@@ -83,7 +82,7 @@ namespace GameDev2D
 
 	void Audio::FadeIn(double duration)
 	{
-		m_State = F_In;
+        m_Fader = Fade_In;
 		m_FadeDuration = duration;
 		m_FadeTimer = 0.0;
 
@@ -95,7 +94,7 @@ namespace GameDev2D
 	{
 		if (IsPlaying() == true)
 		{
-			m_State = F_Out;
+            m_Fader = Fade_Out;
 			m_FadeDuration = duration;
 			m_FadeTimer = 0.0;
 		}
@@ -282,25 +281,25 @@ namespace GameDev2D
 			UpdateEvent* update = (UpdateEvent*)event;
 			double delta = update->GetDelta();
 
-			if (m_State == F_In)
+			if (m_Fader == Fade_In)
 			{
 				m_FadeTimer += delta;
 				if (m_FadeTimer >= m_FadeDuration)
 				{
 					m_FadeTimer = m_FadeDuration;
-					m_State = Regular;
+                    m_Fader = NoFade;
 				}
 
 				float pct = m_FadeTimer / m_FadeDuration;
 				SetVolume(pct);
 			}
-			else if (m_State == F_Out)
+			else if (m_Fader == Fade_Out)
 			{
 				m_FadeTimer += delta;
 				if (m_FadeTimer >= m_FadeDuration)
 				{
 					m_FadeTimer = m_FadeDuration;
-					m_State = Regular;
+                    m_Fader = NoFade;
 				}
 
 				float pct = 1.0f - (m_FadeTimer / m_FadeDuration);
