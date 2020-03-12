@@ -30,6 +30,7 @@ namespace GameDev2D
 
         //Play and Stop methods
         void Play(bool forcePlay = false);
+        void Pause();
         void Stop();
 
 		void FadeIn(double duration);

@@ -44,8 +44,14 @@ namespace GameDev2D
 		//We can only have one
 		if (IsPlaying() == false)
 		{
-			//Submit the source buffer and start playing the sound
-			m_Source->SubmitSourceBuffer(&m_Buffer);
+			//Submit the source buffer and Reset the buffer
+            if (m_State == Stopped)
+            {
+                m_Source->SubmitSourceBuffer(&m_Buffer);
+                m_Buffer.PlayBegin = 0;
+            }
+
+            //Start playing the sound
 			m_Source->Start();
 
 			//Query the state of the buffer to calculate the sample offset, 
@@ -53,9 +59,6 @@ namespace GameDev2D
 			XAUDIO2_VOICE_STATE state;
 			m_Source->GetState(&state);
 			m_SampleOffset = state.SamplesPlayed;
-
-			//Reset the buffer
-			m_Buffer.PlayBegin = 0;
 
 			//Set the State flag to Playing
             m_State = Playing;
@@ -69,6 +72,15 @@ namespace GameDev2D
 			}
 		}
 	}
+
+    void Audio::Pause()
+    {
+        //Stop playing the sound
+        m_Source->Stop();
+
+        //Set the State flag to Stopped
+        m_State = Paused;
+    }
 
 	void Audio::Stop()
 	{
@@ -314,7 +326,7 @@ namespace GameDev2D
 
 		if (aEvent.GetEventCode() == AUDIO_PLAYBACK_ENDED)
 		{
-			m_IsPlaying = false;
+			m_State = Stopped;
 		}
 	}
 }
