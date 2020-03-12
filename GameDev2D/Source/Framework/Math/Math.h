@@ -25,6 +25,8 @@ namespace GameDev2D
 
         static bool IsClose(float value, float target, float range);
 
+        static float Lerp(float start, float end, float t);
+
     private:
         static Random s_Random;
     };

@@ -14,13 +14,14 @@
 
 namespace GameDev2D
 {
+    const float GamePad::DeadZone = 0.2f;
+
     GamePad::GamePad(Port aPort) : EventDispatcher(),
         m_Vibration(Vibration()),
         m_LeftThumbStick(Vector2(0.0f, 0.0f)),
         m_RightThumbStick(Vector2(0.0f, 0.0f)),
         m_LeftTrigger(0.0f),
         m_RightTrigger(0.0f),
-        m_Deadzone(0.2f),
         m_Port(aPort),
         m_IsConnected(false)
     {
@@ -151,7 +152,7 @@ namespace GameDev2D
             m_LeftThumbStick.y = ConvertAnalogToFloat(aState.Gamepad.sThumbLY);
 
             //Is the magnitude less than the deadzone? if it is, zero the analog input
-            if (m_LeftThumbStick.Length() < m_Deadzone)
+            if (m_LeftThumbStick.Length() < DeadZone)
             {
                 m_LeftThumbStick = Vector2(0.0f, 0.0f);
             }
@@ -167,7 +168,7 @@ namespace GameDev2D
             m_RightThumbStick.x = ConvertAnalogToFloat(aState.Gamepad.sThumbRX);
             m_RightThumbStick.y = ConvertAnalogToFloat(aState.Gamepad.sThumbRY);
 
-            if (m_RightThumbStick.Length() < m_Deadzone)
+            if (m_RightThumbStick.Length() < DeadZone)
             {
                 m_RightThumbStick = Vector2(0.0f, 0.0f);
             }

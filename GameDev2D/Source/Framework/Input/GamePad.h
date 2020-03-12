@@ -27,6 +27,8 @@ namespace GameDev2D
     class GamePad : public EventDispatcher
     {
     public:
+        static const float DeadZone;
+
         enum Port
         {
             Port_1 = 0,
@@ -166,7 +168,6 @@ namespace GameDev2D
         float m_LeftTrigger;
         float m_RightTrigger;
         Port m_Port;
-        float m_Deadzone;
         bool m_IsConnected;
     };
 }

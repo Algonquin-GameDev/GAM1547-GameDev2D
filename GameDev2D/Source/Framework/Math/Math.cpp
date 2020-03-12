@@ -85,4 +85,9 @@ namespace GameDev2D
 
         return false;
     }
+
+    float Math::Lerp(float start, float end, float t)
+    {
+        return start * (1 - t) + end * t;
+    }
 }

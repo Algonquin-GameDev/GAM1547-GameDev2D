@@ -176,4 +176,9 @@ namespace GameDev2D
     {
         return Services::GetInputManager()->GetMouse()->GetPosition();
     }
+
+    GamePad* GetGamePad(GamePad::Port port)
+    {
+        return Services::GetInputManager()->GetGamePad(port);
+    }
 }

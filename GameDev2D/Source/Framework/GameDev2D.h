@@ -222,4 +222,8 @@ namespace GameDev2D
 
     // Returns the current position of the mouse
     Vector2 GetMousePosition();
+
+
+    //Returns a GamePad pointer, optional parameter for which Port, default is Port 1
+    GamePad* GetGamePad(GamePad::Port port = GamePad::Port_1);
 }
