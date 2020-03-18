@@ -29,9 +29,6 @@ namespace GameDev2D
         m_BoundDataBuffer(0),
         m_Stats(Graphics::Stats())
     {
-        //Create the Camera object
-		PushCamera(m_MainCamera);
-
         //Set the clear color
         SetClearColor(BACKGROUND_CLEAR_COLOR);
     }
@@ -430,7 +427,11 @@ namespace GameDev2D
 
     Camera* Graphics::GetActiveCamera()
     {
-        return &m_CameraStack.back();
+		if (m_CameraStack.size() > 0)
+		{
+			return &m_CameraStack.back();
+		}
+		return GetMainCamera();
     }
 
 	Camera* Graphics::GetMainCamera()
