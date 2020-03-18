@@ -35,7 +35,20 @@ namespace GameDev2D
 
 	void ColliderGroup::PostCollisionUpdate(double delta)
 	{
-		//TODO:
+		//Check all the in-active colliders, and see if any became active since last frame
+		std::vector<Collider*>::iterator it = activeColliders.begin();
+		while (it != activeColliders.end())
+		{
+			if ((*it)->IsActive() == false)
+			{
+				inactiveColliders.push_back((*it));
+				it = activeColliders.erase(it);
+			}
+			else
+			{
+				it++;
+			}
+		}
 	}
 
 	void ColliderGroup::DebugDraw()
