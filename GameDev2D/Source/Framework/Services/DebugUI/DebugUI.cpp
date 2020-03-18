@@ -5,6 +5,7 @@
 #include "../../Windows/Application.h"
 #include <GameDev2D.h>
 #include <sstream>
+#include <iomanip>
 
 
 namespace GameDev2D
@@ -27,10 +28,9 @@ namespace GameDev2D
         WatchUnsignedLongLong(std::bind(&Graphics::GetAllocatedTextureMemory, Services::GetGraphics()), true);
 #endif
 
-		//WatchUnsignedLongLong(MyMemory_GetNumberOfBytesAllocated, true);
-	//	WatchUnsignedLongLong(MyMemory_GetNumberOfMemoryAllocations, false);
-
-
+#if DEBUG_DRAW_CAMERA_POSITION
+		WatchVector2(std::bind(&Camera::GetPosition, Services::GetGraphics()->GetMainCamera()));
+#endif
 
 
 #if DEBUG ||_DEBUG
@@ -127,6 +127,8 @@ namespace GameDev2D
             for (unsigned int i = 0; i < m_Vector2Callbacks.size(); i++)
             {
                 Vector2 value = m_Vector2Callbacks.at(i)();
+				ss << std::fixed;
+				ss << std::setprecision(2);
                 ss << value.x << "," << value.y;
                 Services::GetGraphics()->DrawString(fontData, ss.str(), origin, DEBUG_TEXT_COLOR);
                 ss.str(""); //Clear the stringstream

@@ -20,6 +20,7 @@ namespace GameDev2D
         m_TexturedVertexData(nullptr),
         m_PolygonVertexData(nullptr),
         m_SpriteBatch(nullptr),
+		m_MainCamera(),
         m_ClearColor(Color::WhiteColor()),
         m_BoundShaderProgram(0),
         m_BoundTextureId(0),
@@ -29,7 +30,7 @@ namespace GameDev2D
         m_Stats(Graphics::Stats())
     {
         //Create the Camera object
-		PushCamera(Camera());
+		PushCamera(m_MainCamera);
 
         //Set the clear color
         SetClearColor(BACKGROUND_CLEAR_COLOR);
@@ -431,6 +432,11 @@ namespace GameDev2D
     {
         return &m_CameraStack.back();
     }
+
+	Camera* Graphics::GetMainCamera()
+	{
+		return &m_MainCamera;
+	}
 
 	void Graphics::PushCamera(const Camera& aCamera)
 	{

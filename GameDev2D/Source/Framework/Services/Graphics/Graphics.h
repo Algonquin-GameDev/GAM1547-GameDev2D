@@ -61,6 +61,9 @@ namespace GameDev2D
         //Returns the active  Camera
         Camera* GetActiveCamera();
 
+		//Returns the main rendering Camera
+		Camera* GetMainCamera();
+
 		//
 		void PushCamera(const Camera& camera);
 
@@ -259,6 +262,7 @@ namespace GameDev2D
         VertexData* m_TexturedVertexData;
         VertexData* m_PolygonVertexData;
         SpriteBatch* m_SpriteBatch;  //Used for Text rendering
+		Camera m_MainCamera;
 		std::vector<Camera> m_CameraStack;
         Color m_ClearColor;
         unsigned int m_BoundShaderProgram;
