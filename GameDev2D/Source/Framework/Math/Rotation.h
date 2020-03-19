@@ -11,6 +11,9 @@ namespace GameDev2D
     public:
         Rotation();
 
+		//Zero rotation constant
+		static const Rotation Zero;
+
 		static Rotation Degrees(float degrees);
 		static Rotation Radians(float radians);
 		static Rotation Direction(const Vector2& direction);

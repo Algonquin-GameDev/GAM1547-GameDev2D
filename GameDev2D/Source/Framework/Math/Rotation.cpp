@@ -5,6 +5,9 @@
 
 namespace GameDev2D
 {
+	const Rotation Rotation::Zero = Rotation::Radians(0.0f);
+
+
     Rotation::Rotation()
     {
         SetRadians(0.0f);
